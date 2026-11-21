@@ -1,0 +1,25 @@
+node_modules/
+dist/
+
+# 本地环境与编辑器
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+*.iml
+.DS_Store
+
+# 安卓构建产物
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/app/src/main/assets/
+*.apk
+*.aab
+
+# 签名文件
+*.jks
+*.keystore
+keystore.properties

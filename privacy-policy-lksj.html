@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>隐私政策 - 恋咖手记</title>
+  <meta name="description" content="恋咖手记隐私政策">
+  <style>
+    :root {
+      --bg: #F2ECE3;
+      --card: #FFFFFF;
+      --text: #5C4B3E;
+      --heading: #2C211A;
+      --muted: #8C7A6B;
+      --muted-soft: #7A6859;
+      --accent: #7C4D2B;
+      --accent-text: #FFFFFF;
+      --border: #E6DDD1;
+      --border-light: #EFE7DC;
+      --highlight: #F5EFE6;
+      --contact-bg: #FAF7F2;
+      --shadow: 0 18px 50px rgba(44, 33, 26, 0.08);
+      color-scheme: light;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 40px 16px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color 160ms ease, color 160ms ease;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .brand {
+      margin-bottom: 22px;
+      text-align: center;
+    }
+
+    .brand-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: var(--accent);
+      color: var(--accent-text);
+      box-shadow: 0 10px 24px rgba(124, 77, 43, 0.25);
+    }
+
+    .brand-name {
+      margin-top: 12px;
+      color: var(--heading);
+      font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-sub {
+      margin-top: 4px;
+      color: var(--muted-soft);
+      font-size: 12px;
+    }
+
+    .document {
+      padding: 40px 44px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .doc-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .doc-icon {
+      display: inline-flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--highlight);
+      color: var(--accent);
+    }
+
+    .doc-header h1 {
+      color: var(--heading);
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .effective {
+      margin-bottom: 20px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .highlight {
+      margin-bottom: 18px;
+      padding: 16px 18px;
+      background: var(--highlight);
+      border-left: 4px solid var(--accent);
+      border-radius: 14px;
+    }
+
+    .highlight p {
+      margin-bottom: 0;
+    }
+
+    p,
+    li {
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.85;
+    }
+
+    p {
+      margin-bottom: 14px;
+    }
+
+    .section {
+      margin-top: 28px;
+    }
+
+    .section h2 {
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      color: var(--heading);
+      font-size: 16px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .section p:last-child {
+      margin-bottom: 0;
+    }
+
+    ol {
+      margin: 0 0 14px;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      padding-left: 4px;
+    }
+
+    li::marker {
+      color: #A99077;
+    }
+
+    strong {
+      color: var(--heading);
+      font-weight: 600;
+    }
+
+    .contact {
+      margin-top: 4px;
+      padding: 14px 16px;
+      background: var(--contact-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .contact p {
+      margin-bottom: 4px;
+    }
+
+    .contact p:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact .note {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-light);
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .footer p {
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer p:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 24px 12px;
+      }
+
+      .brand {
+        margin-bottom: 18px;
+      }
+
+      .brand-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+      }
+
+      .brand-name {
+        font-size: 24px;
+      }
+
+      .document {
+        padding: 28px 20px;
+        border-radius: 20px;
+      }
+
+      .doc-header {
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+      }
+
+      .doc-header h1 {
+        font-size: 19px;
+      }
+
+      p,
+      li {
+        font-size: 13.5px;
+      }
+
+      .section {
+        margin-top: 24px;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0F0C0A;
+        --card: #211B16;
+        --text: #CBBBA9;
+        --heading: #F4EDE4;
+        --muted: #9E8C7C;
+        --muted-soft: #B8A898;
+        --accent: #C89463;
+        --accent-text: #16120F;
+        --border: #382E26;
+        --border-light: #2F261F;
+        --highlight: #2A211A;
+        --contact-bg: #2A211A;
+        --shadow: none;
+        color-scheme: dark;
+      }
+
+      .brand-icon {
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+      }
+
+      li::marker {
+        color: #9E8C7C;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="brand">
+      <div class="brand-icon" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
+          <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
+          <line x1="6" x2="6" y1="2" y2="4"></line>
+          <line x1="10" x2="10" y1="2" y2="4"></line>
+          <line x1="14" x2="14" y1="2" y2="4"></line>
+        </svg>
+      </div>
+      <div class="brand-name">恋咖手记</div>
+      <div class="brand-sub">记录每一杯咖啡的风味与心情</div>
+    </header>
+
+    <main class="document">
+      <div class="doc-header">
+        <div class="doc-icon" aria-hidden="true">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
+        </div>
+        <h1>隐私政策</h1>
+      </div>
+
+      <p class="effective">生效日期：2026年11月21日</p>
+
+      <div class="highlight">
+        <p>欢迎使用「恋咖手记」（以下简称“本应用”）。本应用由<strong>深圳丰佰瑞网络科技有限公司</strong>（以下简称“我们”）开发并运营。我们深知个人信息对您的重要性，将严格遵守《中华人民共和国个人信息保护法》《中华人民共和国网络安全法》等法律法规，保护您的个人信息安全。</p>
+      </div>
+
+      <p>本应用是一款纯本地的咖啡记录工具，不设账号体系，不提供云端服务。本政策说明我们如何处理您在使用过程中产生和保存的信息，以及您对这些信息享有的权利。请您在使用本应用前仔细阅读并充分理解本政策的全部内容，尤其是加粗的条款。如您对本政策有任何疑问，可通过本政策末尾的联系方式与我们联系。</p>
+
+      <section class="section">
+        <h2>一、我们收集的信息</h2>
+        <p><strong>1. 咖啡记录数据：</strong>您主动录入的咖啡名称、品牌或店铺、价格、饮用时间、冷热类型、品类、来源、评分、是否复购、备注、口味标签，以及您主动选择的配图。上述信息仅保存在您的设备本地（浏览器 / 应用 WebView 的 IndexedDB 与应用私有存储），我们不会上传、同步或读取。</p>
+        <p><strong>2. 我们不收集：</strong>设备型号、操作系统版本、设备标识符（如 IMEI、Android ID、OAID、MAC 地址）、IP 地址、位置信息、通讯录、短信、通话记录、麦克风、相机画面、剪贴板、应用列表、行为日志或用户画像。</p>
+        <p><strong>3. 无第三方 SDK：</strong>本应用未集成任何第三方统计、推送、支付、地图等服务或 SDK，不包含向外部服务器发送数据的网络请求逻辑。</p>
+      </section>
+
+      <section class="section">
+        <h2>二、权限与系统能力</h2>
+        <p><strong>1. 图片选择：</strong>仅通过系统照片选择器读取您当次主动选择的图片（最多 3 张），在本地压缩后保存到应用私有空间。本应用不会读取相册中的其他图片，也不会将图片写入系统相册。</p>
+        <p><strong>2. 文件导入与导出：</strong>CSV 备份与恢复通过系统文件选择器（SAF）由您手动指定文件位置，应用仅处理您当次选中的单个文件。</p>
+        <p><strong>3. 不申请的权限：</strong>本应用不申请网络、定位、相机、麦克风、通讯录、短信、通话记录、通知等敏感权限，也不在后台收集任何信息。</p>
+      </section>
+
+      <section class="section">
+        <h2>三、我们如何使用信息</h2>
+        <p>我们仅将上述信息用于实现以下本地功能：</p>
+        <ol>
+          <li>在「今日咖记」「全部手记」「日历」中展示您的咖啡记录；</li>
+          <li>在「咖账」中生成消费金额、杯数、品类与评分等统计图表；</li>
+          <li>在您主动导出时，于本地生成 CSV 备份文件。</li>
+        </ol>
+        <p>我们不会将您的信息用于用户画像、数据分析、模型训练或其他目的，也不会向任何第三方共享、转让或公开披露，法律法规另有强制性规定的除外。</p>
+      </section>
+
+      <section class="section">
+        <h2>四、存储地点与期限</h2>
+        <p><strong>1. 存储地点：</strong>所有数据仅存储于您当前设备的应用私有空间，不存储于我们的服务器（本应用没有云端服务器）。</p>
+        <p><strong>2. 存储期限：</strong>数据保留至您主动删除单条记录、在设置中清空全部数据、清除应用数据或卸载应用为止。</p>
+        <p><strong>3. 数据丢失风险：</strong>卸载应用、清除应用数据、更换设备或系统故障都可能导致数据不可恢复。CSV 备份不包含配图，建议您定期导出备份。</p>
+      </section>
+
+      <section class="section">
+        <h2>五、我们如何保护信息</h2>
+        <p>您的数据受操作系统应用沙箱保护。安卓版本不申请网络权限，并拦截应用内的外部网络请求；网页版本同样不包含上传逻辑。请您妥善保管设备与锁屏密码，避免在共享设备上留存敏感记录。</p>
+        <p>由于数据完全保存在本地，我们无法访问、备份或恢复您的数据。因设备丢失、系统故障、误删、卸载等原因造成的数据丢失，我们无法承担责任。</p>
+      </section>
+
+      <section class="section">
+        <h2>六、您的权利</h2>
+        <ol>
+          <li><strong>访问与更正：</strong>您可以在应用内随时查看、编辑您的咖啡记录。</li>
+          <li><strong>删除：</strong>您可以删除单条记录，或在「设置」中一键清空全部本地数据。</li>
+          <li><strong>导出与备份：</strong>您可以在「设置」或「咖账」中主动导出 CSV 文件。</li>
+          <li><strong>撤回同意：</strong>您可以停止使用并卸载本应用，卸载即停止对本地数据的处理。撤回同意不影响撤回前基于您的同意已进行的本地处理。</li>
+          <li><strong>说明：</strong>由于本应用不收集可识别您身份的信息，也没有账号体系，相关访问、更正和删除操作均在您的设备上完成，我们无法在远端代为操作。</li>
+        </ol>
+      </section>
+
+      <section class="section">
+        <h2>七、未成年人保护</h2>
+        <p>我们非常重视对未成年人个人信息的保护。如您是未满 14 周岁的未成年人，应在监护人的指导下阅读本政策，并在取得监护人同意后使用本应用。本应用不主动收集未成年人信息；如监护人发现相关情况，可通过本政策末尾的邮箱联系我们，我们会在核实后协助处理。由于数据仅保存在本地，删除操作需在设备上完成。</p>
+      </section>
+
+      <section class="section">
+        <h2>八、第三方服务与数据共享</h2>
+        <p>本应用未集成第三方 SDK，不进行数据共享、转让或公开披露。当您主动导出 CSV 时，文件将由您选择保存位置；文件离开本应用后的安全由您及目标位置的服务提供方负责。</p>
+      </section>
+
+      <section class="section">
+        <h2>九、本政策的更新</h2>
+        <p>我们可能会根据法律法规、产品功能或技术的变化适时修订本政策。修订后的政策将在应用内公示并更新生效日期；如变更涉及您的权利或数据处理方式，我们会通过弹窗等显著方式重新征得您的同意。</p>
+      </section>
+
+      <section class="section">
+        <h2>十、联系我们</h2>
+        <p>如您对本隐私政策有任何疑问、意见或建议，请通过以下方式联系我们：</p>
+        <div class="contact">
+          <p><strong>电子邮箱：</strong>Jp182025@163.com</p>
+          <p class="note">我们将在收到邮件后 15 个工作日内回复。</p>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>感谢您使用恋咖手记。</p>
+        <p>© 2026 深圳丰佰瑞网络科技有限公司 版权所有</p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
