@@ -60,6 +60,28 @@ jobs:
           echo "$KEYSTORE_BASE64" | base64 -d > "$KEYSTORE_FILE"
           ls -lh "$KEYSTORE_FILE"
 
+      - name: Output signing certificate SHA1 and SHA256
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEYSTORE_TYPE: ${{ secrets.KEYSTORE_TYPE }}
+        run: |
+          if [ -z "$KEYSTORE_PASSWORD" ]; then
+            echo "KEYSTORE_PASSWORD secret is not set"
+            exit 1
+          fi
+          STORE_TYPE="${KEYSTORE_TYPE:-PKCS12}"
+          keytool -list -v \
+            -keystore "$KEYSTORE_FILE" \
+            -storetype "$STORE_TYPE" \
+            -storepass "$KEYSTORE_PASSWORD" \
+            -alias liankashouji | tee /tmp/keystore-info.txt
+          {
+            echo "### 签名证书指纹"
+            echo '```'
+            grep -E "SHA1:|SHA256:" /tmp/keystore-info.txt || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: Build debug APK
         working-directory: android
         run: gradle assembleDebug --no-daemon --stacktrace
@@ -83,6 +105,25 @@ jobs:
             exit 1
           fi
           gradle clean assembleRelease --no-daemon --stacktrace
+
+      - name: Output APK SHA1 and SHA256
+        run: |
+          for apk in \
+            android/app/build/outputs/apk/release/app-release.apk \
+            android/app/build/outputs/apk/release/app-release-unsigned.apk; do
+            if [ -f "$apk" ]; then
+              echo "== $apk =="
+              sha1sum "$apk"
+              sha256sum "$apk"
+              {
+                echo "### APK 校验值"
+                echo '```'
+                sha1sum "$apk"
+                sha256sum "$apk"
+                echo '```'
+              } >> "$GITHUB_STEP_SUMMARY"
+            fi
+          done
 
       - name: Upload release APK
         uses: actions/upload-artifact@v4
