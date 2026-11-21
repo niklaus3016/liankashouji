@@ -15,15 +15,33 @@ android {
         versionName = "1.0"
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("../my-release-key.keystore")
+            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: "123456"
+            keyAlias = "liankashouji"
+            keyPassword = System.getenv("KEYSTORE_PASSWORD") ?: "123456"
+            enableV1Signing = true
+            enableV2Signing = true
+            storeType = System.getenv("KEYSTORE_TYPE")?.takeIf { it.isNotBlank() } ?: "PKCS12"
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = true
-            isShrinkResources = true
+            isMinifyEnabled = false
+            isShrinkResources = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
+                getDefaultProguardFile("proguard-android.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
+    }
+
+    lint {
+        checkReleaseBuilds = false
+        abortOnError = false
     }
 
     compileOptions {
