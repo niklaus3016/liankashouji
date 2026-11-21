@@ -68,6 +68,7 @@ jobs:
           ls -lh "$KEYSTORE_FILE"
 
       - name: Output signing certificate SHA1 and SHA256
+        id: signing_cert
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEYSTORE_TYPE: ${{ secrets.KEYSTORE_TYPE }}
@@ -77,17 +78,49 @@ jobs:
             exit 1
           fi
           STORE_TYPE="${KEYSTORE_TYPE:-PKCS12}"
-          keytool -list -v \
+          INFO=$(keytool -list -v \
             -keystore "$KEYSTORE_FILE" \
             -storetype "$STORE_TYPE" \
             -storepass "$KEYSTORE_PASSWORD" \
-            -alias liankashouji | tee /tmp/keystore-info.txt
+            -alias liankashouji)
+          SHA1=$(printf '%s\n' "$INFO" | grep -m1 'SHA1:' | sed 's/.*SHA1: *//')
+          SHA256=$(printf '%s\n' "$INFO" | grep -m1 'SHA256:' | sed 's/.*SHA256: *//')
+          SHA1_NO_COLONS=$(printf '%s' "$SHA1" | tr -d ':')
+          SHA256_NO_COLONS=$(printf '%s' "$SHA256" | tr -d ':')
+          if [ -z "$SHA1" ] || [ -z "$SHA256" ]; then
+            echo "未能从 keystore 提取 SHA1/SHA256"
+            exit 1
+          fi
+          {
+            echo "SHA1=$SHA1"
+            echo "SHA1_NO_COLONS=$SHA1_NO_COLONS"
+            echo "SHA256=$SHA256"
+            echo "SHA256_NO_COLONS=$SHA256_NO_COLONS"
+          } | tee /tmp/signing-fingerprints.txt
+          {
+            echo "sha1=$SHA1"
+            echo "sha1_no_colons=$SHA1_NO_COLONS"
+            echo "sha256=$SHA256"
+            echo "sha256_no_colons=$SHA256_NO_COLONS"
+          } >> "$GITHUB_OUTPUT"
           {
             echo "### 签名证书指纹"
-            echo '```'
-            grep -E "SHA1:|SHA256:" /tmp/keystore-info.txt || true
-            echo '```'
+            echo ""
+            echo "- SHA1：\`$SHA1\`"
+            echo "- SHA1（无冒号）：\`$SHA1_NO_COLONS\`"
+            echo "- SHA256：\`$SHA256\`"
+            echo "- SHA256（无冒号）：\`$SHA256_NO_COLONS\`"
           } >> "$GITHUB_STEP_SUMMARY"
+          mkdir -p checksums
+          cp /tmp/signing-fingerprints.txt checksums/signing-fingerprints.txt
+
+      - name: Upload signing fingerprints
+        uses: actions/upload-artifact@v4
+        with:
+          name: lianka-shouji-signing-fingerprints
+          path: checksums/signing-fingerprints.txt
+          if-no-files-found: error
+          retention-days: 30
 
       - name: Build debug APK
         working-directory: android
@@ -115,22 +148,40 @@ jobs:
 
       - name: Output APK SHA1 and SHA256
         run: |
+          mkdir -p checksums
           for apk in \
             android/app/build/outputs/apk/release/app-release.apk \
             android/app/build/outputs/apk/release/app-release-unsigned.apk; do
             if [ -f "$apk" ]; then
-              echo "== $apk =="
-              sha1sum "$apk"
-              sha256sum "$apk"
+              APK_SHA1=$(sha1sum "$apk" | awk '{print $1}')
+              APK_SHA1_WITH_COLONS=$(printf '%s' "$APK_SHA1" | sed 's/../&:/g;s/:$//')
+              APK_SHA256=$(sha256sum "$apk" | awk '{print $1}')
+              APK_SHA256_WITH_COLONS=$(printf '%s' "$APK_SHA256" | sed 's/../&:/g;s/:$//')
+              {
+                echo "== $apk =="
+                echo "SHA1=$APK_SHA1"
+                echo "SHA1_WITH_COLONS=$APK_SHA1_WITH_COLONS"
+                echo "SHA256=$APK_SHA256"
+                echo "SHA256_WITH_COLONS=$APK_SHA256_WITH_COLONS"
+              } | tee -a checksums/apk-fingerprints.txt
               {
                 echo "### APK 校验值"
-                echo '```'
-                sha1sum "$apk"
-                sha256sum "$apk"
-                echo '```'
+                echo ""
+                echo "- SHA1：\`$APK_SHA1\`"
+                echo "- SHA1（带冒号）：\`$APK_SHA1_WITH_COLONS\`"
+                echo "- SHA256：\`$APK_SHA256\`"
+                echo "- SHA256（带冒号）：\`$APK_SHA256_WITH_COLONS\`"
               } >> "$GITHUB_STEP_SUMMARY"
             fi
           done
+
+      - name: Upload APK fingerprints
+        uses: actions/upload-artifact@v4
+        with:
+          name: lianka-shouji-apk-fingerprints
+          path: checksums/apk-fingerprints.txt
+          if-no-files-found: error
+          retention-days: 30
 
       - name: Upload release APK
         uses: actions/upload-artifact@v4
