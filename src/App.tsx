@@ -50,7 +50,6 @@ export function App() {
     themeMode: 'system',
     defaultHomeView: 'today',
     showHomeStats: true,
-    hasInitializedSeed: false,
   });
 
   const [activeTab, setActiveTab] = useState<MainTab>('home');

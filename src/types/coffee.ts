@@ -59,7 +59,6 @@ export interface AppSettings {
   themeMode: ThemeMode;
   defaultHomeView: DefaultHomeView;
   showHomeStats: boolean;
-  hasInitializedSeed: boolean;
 }
 
 export const DRINK_TYPE_LABELS: Record<DrinkType, string> = {
